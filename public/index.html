@@ -20,6 +20,34 @@
             padding: 10px;
             margin: 20px 0;
         }
+        progress {
+            width: 100%;
+            height: 20px;
+            appearance: none;
+        }
+        progress::-webkit-progress-bar {
+            background-color: #ccc;
+            border-radius: 5px;
+        }
+        progress::-webkit-progress-value {
+            background-color: green;
+            border-radius: 5px;
+        }
+        .health-bar-container {
+            position: relative;
+            width: 100%;
+        }
+        .health-bar-text {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: white;
+            line-height: 20px;
+        }
     </style>
 </head>
 <body>
@@ -28,13 +56,19 @@
         <div class="status-panel">
             <div id="player-stats">
                 <h2>Player</h2>
-                <p>Health: <span id="player-health">200</span></p>
+                <div class="health-bar-container">
+                    <progress id="player-health-bar" value="200" max="200"></progress>
+                    <div class="health-bar-text" id="player-health-text">200 / 200</div>
+                </div>
                 <p>Attack: <span id="player-attack">10</span></p>
                 <p>Defense: <span id="player-defense">5</span></p>
             </div>
             <div id="enemy-stats">
                 <h2>Enemy</h2>
-                <p>Health: <span id="enemy-health">50</span></p>
+                <div class="health-bar-container">
+                    <progress id="enemy-health-bar" value="50" max="50"></progress>
+                    <div class="health-bar-text" id="enemy-health-text">50 / 50</div>
+                </div>
                 <p>Attack: <span id="enemy-attack">8</span></p>
                 <p>Defense: <span id="enemy-defense">3</span></p>
             </div>

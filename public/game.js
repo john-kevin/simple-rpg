@@ -38,8 +38,11 @@ class Game {
     }
 
     updateStats() {
-        document.getElementById('player-health').textContent = this.player.health;
-        document.getElementById('enemy-health').textContent = this.enemy.health;
+        document.getElementById('player-health-bar').value = this.player.health;
+        document.getElementById('enemy-health-bar').value = this.enemy.health;
+
+        document.getElementById('player-health-text').textContent = `${this.player.health} / 200`;
+        document.getElementById('enemy-health-text').textContent = `${this.enemy.health} / 50`;
     }
 
     checkGameEnd() {
