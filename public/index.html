@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple RPG</title>
+    <style>
+        .game-container {
+            width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .status-panel {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .battle-log {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Simple RPG</h1>
+        <div class="status-panel">
+            <div id="player-stats">
+                <h2>Player</h2>
+                <p>Health: <span id="player-health">200</span></p>
+                <p>Attack: <span id="player-attack">10</span></p>
+                <p>Defense: <span id="player-defense">5</span></p>
+            </div>
+            <div id="enemy-stats">
+                <h2>Enemy</h2>
+                <p>Health: <span id="enemy-health">50</span></p>
+                <p>Attack: <span id="enemy-attack">8</span></p>
+                <p>Defense: <span id="enemy-defense">3</span></p>
+            </div>
+        </div>
+        <button id="attack-btn">Attack!</button>
+        <div class="battle-log" id="battle-log"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
