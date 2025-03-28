@@ -53,6 +53,12 @@ describe('Character', () => {
         });
 
         attacker.attack(defender);
-        expect(defender.health).toBe(43);
+
+        const minExpectedDamage = Math.floor(attacker.damage * 0.8) - defender.defense;
+        const maxExpectedDamage = Math.floor(attacker.damage * 1.2) - defender.defense;
+        const actualDamage = 50 - defender.health;
+
+        expect(actualDamage).toBeGreaterThanOrEqual(Math.max(1, minExpectedDamage));
+        expect(actualDamage).toBeLessThanOrEqual(Math.max(1, maxExpectedDamage));
     });
 });

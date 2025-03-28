@@ -31,7 +31,9 @@ export class Character {
     }
 
     attack(target: Character): void {
-        target.takeDamage(this.damage);
+        const randomMultiplier = 0.8 + Math.random() * 0.4; // Random value between 0.8 and 1.2
+        const randomDamage = Math.floor(this.damage * randomMultiplier);
+        target.takeDamage(randomDamage);
     }
 
     getStats(): CharacterStats {

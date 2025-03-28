@@ -22,13 +22,13 @@ class Game {
 
     performBattle() {
         // Player attacks enemy
-        const playerDamage = Math.max(1, this.player.attack - this.enemy.defense);
+        const playerDamage = Math.max(1, Math.floor(this.player.attack * (0.8 + Math.random() * 0.4)) - this.enemy.defense);
         this.enemy.health = Math.max(0, this.enemy.health - playerDamage);
         this.log(`Player deals ${playerDamage} damage to enemy!`);
 
         // Enemy attacks player if still alive
         if (this.enemy.health > 0) {
-            const enemyDamage = Math.max(1, this.enemy.attack - this.player.defense);
+            const enemyDamage = Math.max(1, Math.floor(this.enemy.attack * (0.8 + Math.random() * 0.4)) - this.player.defense);
             this.player.health = Math.max(0, this.player.health - enemyDamage);
             this.log(`Enemy deals ${enemyDamage} damage to player!`);
         }
