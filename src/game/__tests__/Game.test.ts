@@ -108,3 +108,21 @@ describe('Game Enemy Types', () => {
         expect(game.player.experience).toBe(initialExperience + experienceReward);
     });
 });
+
+describe('Game Enemy UI', () => {
+    let game: Game;
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <div id="enemy-name"></div>
+            <div id="enemy-health-bar"></div>
+            <div id="enemy-health-text"></div>
+        `;
+        game = new Game();
+    });
+
+    test('should display the correct enemy name in the UI', () => {
+        const enemyNameElement = document.getElementById('enemy-name') as HTMLDivElement | null;
+        expect(enemyNameElement?.textContent).toBe(game.enemy.name);
+    });
+});

@@ -46,6 +46,12 @@ class Game {
     initializeUI() {
         const attackButton = document.getElementById('attack-btn') as HTMLButtonElement | null;
         attackButton?.addEventListener('click', () => this.performBattle());
+        
+        const enemyNameElement = document.getElementById('enemy-name') as HTMLDivElement | null;
+        if (enemyNameElement) {
+            enemyNameElement.textContent = this.enemy.name; // Set enemy name in the UI
+        }
+
         this.updateStats();
     }
 
@@ -94,8 +100,9 @@ class Game {
         const playerDefense = document.getElementById('player-defense') as HTMLSpanElement | null;
         const playerExperienceBar = document.getElementById('player-experience-bar') as HTMLProgressElement | null;
         const playerExperienceText = document.getElementById('player-experience-text') as HTMLDivElement | null;
+        const enemyName = document.getElementById('enemy-name') as HTMLDivElement | null;
 
-        if (playerHealthBar && enemyHealthBar && playerHealthText && enemyHealthText && playerAttack && playerDefense && playerExperienceBar && playerExperienceText) {
+        if (playerHealthBar && enemyHealthBar && playerHealthText && enemyHealthText && playerAttack && playerDefense && playerExperienceBar && playerExperienceText && enemyName) {
             playerHealthBar.value = this.player.health;
             playerHealthBar.max = this.player.maxHealth;
             enemyHealthBar.value = this.enemy.health;
@@ -110,6 +117,8 @@ class Game {
             playerExperienceBar.value = this.player.experience;
             playerExperienceBar.max = this.player.experienceToNextLevel;
             playerExperienceText.textContent = `${this.player.experience} / ${this.player.experienceToNextLevel}`;
+
+            enemyName.textContent = this.enemy.name; // Display enemy type
         }
     }
 
