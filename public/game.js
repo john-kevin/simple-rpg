@@ -2,16 +2,21 @@ class Game {
     constructor() {
         this.player = {
             health: 200,
+            maxHealth: 200,
             attack: 10,
-            defense: 5
+            defense: 5,
+            level: 1,
+            experience: 0,
+            experienceToNextLevel: 100
         };
-        
+
         this.enemy = {
             health: 50,
+            maxHealth: 50,
             attack: 8,
             defense: 3
         };
-        
+
         this.initializeUI();
     }
 
@@ -31,18 +36,44 @@ class Game {
             const enemyDamage = Math.max(1, Math.floor(this.enemy.attack * (0.8 + Math.random() * 0.4)) - this.player.defense);
             this.player.health = Math.max(0, this.player.health - enemyDamage);
             this.log(`Enemy deals ${enemyDamage} damage to player!`);
+        } else {
+            this.gainExperience(50); // Grant XP for defeating the enemy
+            this.log('Enemy defeated! You gained 50 XP.');
         }
 
         this.updateStats();
         this.checkGameEnd();
     }
 
+    gainExperience(amount) {
+        this.player.experience += amount;
+        if (this.player.experience >= this.player.experienceToNextLevel) {
+            this.levelUp();
+        }
+    }
+
+    levelUp() {
+        this.player.level++;
+        this.player.experience -= this.player.experienceToNextLevel;
+        this.player.experienceToNextLevel = Math.floor(this.player.experienceToNextLevel * 1.5);
+        this.player.maxHealth += 20;
+        this.player.health = this.player.maxHealth;
+        this.player.attack += 2;
+        this.player.defense += 1;
+        this.log(`Level up! You are now level ${this.player.level}.`);
+    }
+
     updateStats() {
         document.getElementById('player-health-bar').value = this.player.health;
+        document.getElementById('player-health-bar').max = this.player.maxHealth;
         document.getElementById('enemy-health-bar').value = this.enemy.health;
+        document.getElementById('enemy-health-bar').max = this.enemy.maxHealth;
 
-        document.getElementById('player-health-text').textContent = `${this.player.health} / 200`;
-        document.getElementById('enemy-health-text').textContent = `${this.enemy.health} / 50`;
+        document.getElementById('player-health-text').textContent = `${this.player.health} / ${this.player.maxHealth}`;
+        document.getElementById('enemy-health-text').textContent = `${this.enemy.health} / ${this.enemy.maxHealth}`;
+
+        document.getElementById('player-attack').textContent = this.player.attack;
+        document.getElementById('player-defense').textContent = this.player.defense;
     }
 
     checkGameEnd() {
