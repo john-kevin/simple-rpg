@@ -1,6 +1,13 @@
 import { JSDOM } from 'jsdom';
 import fs from 'fs';
 import path from 'path';
+import Game from '../Game';
+
+beforeAll(() => {
+    const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', { url: 'http://localhost/' });
+    global.window = dom.window as unknown as Window & typeof globalThis;
+    global.document = dom.window.document;
+});
 
 describe('Game UI', () => {
     let dom;
@@ -76,5 +83,28 @@ describe('Game UI', () => {
         expect(player.health).toBe (220);
         expect(player.attack).toBe(12);
         expect(player.defense).toBe(6);
+    });
+});
+
+describe('Game Enemy Types', () => {
+    let game: Game;
+
+    beforeEach(() => {
+        game = new Game();
+    });
+
+    test('should initialize a random enemy from enemy types', () => {
+        const enemyNames = game.enemyTypes.map(enemy => enemy.name);
+        expect(enemyNames).toContain(game.enemy.name);
+    });
+
+    test('should grant correct experience reward when enemy is defeated', () => {
+        const initialExperience = game.player.experience;
+        const experienceReward = game.enemy.experienceReward;
+
+        game.enemy.health = 0; // Simulate enemy defeat
+        game.gainExperience(experienceReward);
+
+        expect(game.player.experience).toBe(initialExperience + experienceReward);
     });
 });
