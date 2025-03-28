@@ -74,6 +74,11 @@ class Game {
 
         document.getElementById('player-attack').textContent = this.player.attack;
         document.getElementById('player-defense').textContent = this.player.defense;
+
+        // Update experience bar
+        document.getElementById('player-experience-bar').value = this.player.experience;
+        document.getElementById('player-experience-bar').max = this.player.experienceToNextLevel;
+        document.getElementById('player-experience-text').textContent = `${this.player.experience} / ${this.player.experienceToNextLevel}`;
     }
 
     checkGameEnd() {

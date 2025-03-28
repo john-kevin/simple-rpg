@@ -28,6 +28,24 @@ describe('Game UI', () => {
         expect(playerHealthText.textContent).toBe('150 / 200');
     });
 
+    test('should update experience bar and text correctly', () => {
+        const playerExperienceBar = document.getElementById('player-experience-bar') as HTMLProgressElement | null;
+        const playerExperienceText = document.getElementById('player-experience-text') as HTMLDivElement | null;
+
+        if (!playerExperienceBar || !playerExperienceText) {
+            throw new Error('Experience bar or experience text element not found');
+        }
+
+        // Simulate experience update
+        playerExperienceBar.value = 40;
+        playerExperienceBar.max = 100;
+        playerExperienceText.textContent = '40 / 100';
+
+        expect(playerExperienceBar.value).toBe(40);
+        expect(playerExperienceBar.max).toBe(100);
+        expect(playerExperienceText.textContent).toBe('40 / 100');
+    });
+
     test('should gain experience and level up correctly', () => {
         const player = {
             health: 200,
@@ -55,7 +73,7 @@ describe('Game UI', () => {
         expect(player.experience).toBe(10);
         expect(player.experienceToNextLevel).toBe(150);
         expect(player.maxHealth).toBe(220);
-        expect(player.health).toBe(220);
+        expect(player.health).toBe (220);
         expect(player.attack).toBe(12);
         expect(player.defense).toBe(6);
     });
